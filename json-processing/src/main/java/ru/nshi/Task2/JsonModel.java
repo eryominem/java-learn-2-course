@@ -10,23 +10,7 @@ public class JsonModel {
         return algorithm;
     }
 
-    public void setAlgorithm(String algorithm) {
-        this.algorithm = algorithm;
-    }
-
     public int[] getValues() {
         return values;
-    }
-
-    public void setValues(int[] values) {
-        this.values = values;
-    }
-
-    @Override
-    public String toString() {
-        return "JsonModel{" +
-                "algorithm='" + algorithm + '\'' +
-                ", values=" + Arrays.toString(values) +
-                '}';
     }
 }

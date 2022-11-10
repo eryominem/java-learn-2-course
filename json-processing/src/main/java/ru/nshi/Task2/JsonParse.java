@@ -32,23 +32,15 @@ public class JsonParse {
         File file = new File(jsonPath);
         JsonModel jsonModel = objectMapper.readValue(file, JsonModel.class);
         return jsonModel;
-
-        /*ArrayNode values = (ArrayNode) objectMapper.readTree(file).get("values");
-
-        ArrayList<Integer> numbers = new ArrayList<>();
-        for (JsonNode node : values) {
-            numbers.add(node.asInt());
-        }*/
-        /*HashMap<String, List<Integer>> storage = new HashMap<>();
-        storage.put(objectMapper.readTree(file).get("algorithm").asText(), numbers);*/
     }
 
     public String sortAndSerialize(JsonModel jsonModel) throws JsonProcessingException {
         String algorithm = jsonModel.getAlgorithm();
-        //System.out.println(sorters.containsKey("bubble"));
 
         if (jsonModel.getValues() == null) {
-            return objectMapper.writeValueAsString("\"errorMessage\": Array is null");
+            return objectMapper.writeValueAsString(
+                    new JsonError("Array is null")
+            );
         }
 
         int[] values;
@@ -57,8 +49,9 @@ public class JsonParse {
         try {
             values = sorters.get(algorithm).sort(jsonModel.getValues());
         } catch (Exception e) {
-            return objectMapper.writeValueAsString
-                    (String.format("\"errorMessage\": Algorithm %s is not supported.", algorithm));
+            return objectMapper.writeValueAsString(
+                    new JsonError(String.format(String.format("Algorithm %s is not supported", algorithm)))
+            );
         }
 
         long timeAfterSort = System.currentTimeMillis();
@@ -66,34 +59,6 @@ public class JsonParse {
 
         String response = objectMapper.writeValueAsString(new JsonDTO(sortingTime, values));
         return response;
-
-        /*long timeBeforeSort = System.currentTimeMillis();
-        switch (algorithm) {
-            case "bubble":
-                BubbleSort bubbleSort = new BubbleSort();
-                jsonModel.setValues(bubbleSort.sort(jsonModel.getValues()));
-                break;
-
-            case "insertion":
-                InsertionSort insertionSort = new InsertionSort();
-                jsonModel.setValues(insertionSort.sort(jsonModel.getValues()));
-                break;
-        }*/
     }
 }
 
-class Main {
-    public static void main(String[] args) throws IOException {
-        String jsonPath = "json-processing\\src\\main\\resources\\nullArray.json";
-        HashMap<String, Sorter> sorters = new HashMap<>();
-        sorters.put("bubble", new BubbleSort());
-
-        JsonParse jsonParse = new JsonParse(sorters);
-
-        JsonModel jsonModel = jsonParse.deserialization(jsonPath);
-        System.out.println(jsonModel);
-
-        String result = jsonParse.JsonProcessing(jsonPath);
-        System.out.println(result);
-    }
-}
