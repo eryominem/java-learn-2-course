@@ -26,7 +26,7 @@ public class JsonSortTest {
 
     @Test
     public void arrayIsNullTest() throws IOException {
-        String jsonPath = "src\\main\\resources\\nullArray.json";
+        String jsonPath = "src/main/resources/nullArray.json";
         String result = jsonParse.JsonProcessing(jsonPath);
 
         Assertions.assertTrue(result.contains("errorMessage"));
@@ -35,7 +35,7 @@ public class JsonSortTest {
 
     @Test
     public void unsupportedAlgorithm() throws IOException {
-        String jsonPath = "src\\main\\resources\\unsupportedAlgorithm.json";
+        String jsonPath = "src/main/resources/unsupportedAlgorithm.json";
         String result = jsonParse.JsonProcessing(jsonPath);
 
         Assertions.assertTrue(result.contains("errorMessage"));
@@ -44,7 +44,7 @@ public class JsonSortTest {
 
     @Test
     public void sortJsonTest() throws Exception {
-        String jsonPath = "src\\main\\resources\\example.json";
+        String jsonPath = "src/main/resources/example.json";
         String result = jsonParse.JsonProcessing(jsonPath);
 
         ObjectMapper objectMapper = new ObjectMapper()

@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class JsonParse {
-    private static final String JSON_PATH = "src/main/resources/example.json";
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     private HashMap<String, Sorter> sorters;
