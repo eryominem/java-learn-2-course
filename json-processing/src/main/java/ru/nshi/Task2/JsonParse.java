@@ -1,6 +1,5 @@
 package ru.nshi.Task2;
 
-import ru.nshi.Task1.BubbleSort;
 import ru.nshi.Task1.Sorter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -59,5 +58,6 @@ public class JsonParse {
         String response = objectMapper.writeValueAsString(new JsonDTO(sortingTime, values));
         return response;
     }
+
 }
 
