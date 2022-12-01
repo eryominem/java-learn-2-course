@@ -43,21 +43,20 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<Song> getSortedSongList() {
+    public List<Song> getSortedSongList(Integer limit) {
         return songRepository.findAll().stream()
                 .sorted((o1, o2) -> o2.getAuditions() - o1.getAuditions())
+                .limit(limit)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Song updateSongAuditionsById(Long id, AuditionsDTO auditionsDTO) {
-        System.out.println("before");
         Song songToUpdate = songRepository.getById(id);
 
         if (auditionsDTO == null || auditionsDTO.getAuditions() < 1)
             throw new SongValidationException("Auditions must be greater than 0");
 
-        System.out.println("after");
         songToUpdate.setAuditions(songToUpdate.getAuditions() + auditionsDTO.getAuditions());
         return songToUpdate;
     }

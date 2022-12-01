@@ -13,7 +13,7 @@ public interface SongService {
     Song deleteById(Long id);
 
     List<Song> getSongList();
-    List<Song> getSortedSongList();
+    List<Song> getSortedSongList(Integer limit);
     List<Song> updateSongAuditionsByIds(AuditionsDTO auditionsDTO);
 
 }
