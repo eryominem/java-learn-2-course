@@ -43,9 +43,8 @@ public class SortServlet extends HttpServlet {
             sortingResponse = jsonParse.sortAndSerialize(new JsonModel(algorithm, sortingRequest.getValues()));
 
         } catch (NullPointerException e) {
-            objectMapper.writeValue(resp.getWriter(), Map.of("error", "Unsupported algorithm"));
-            System.out.println("huy");
             resp.setStatus(404);
+            objectMapper.writeValue(resp.getWriter(), Map.of("error", "Unsupported algorithm"));
             return;
         }
 
