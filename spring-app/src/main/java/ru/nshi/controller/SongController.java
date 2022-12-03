@@ -12,7 +12,6 @@ import ru.nshi.model.Song;
 import ru.nshi.model.Error;
 import ru.nshi.service.SongServiceImpl;
 import java.util.List;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @RestController
 public class SongController {
@@ -59,12 +58,13 @@ public class SongController {
         return songService.getSortedSongList(limit);
     }
 
-    @PutMapping(path = "/songs/listen", produces = MediaType.APPLICATION_JSON_VALUE)
+    // or PUT
+    @PostMapping(path = "/songs/listen", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Song> listenSongByIds(@RequestBody AuditionsDTO auditionsDTO) {
         return songService.updateSongAuditionsByIds(auditionsDTO);
     }
 
-    @PutMapping(path = "/songs/listen/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/songs/{id}/listen", produces = MediaType.APPLICATION_JSON_VALUE)
     public Song listenSongById(@PathVariable("id") Long id, @RequestBody AuditionsDTO auditionsDTO) {
         checkId(id);
         return songService.updateSongAuditionsById(id, auditionsDTO);
@@ -93,7 +93,8 @@ public class SongController {
     }
 
     void checkSong(Song song) {
-        if (song == null || song.getArtistName() == null || song.getName() == null || song.getAuditions() < 0) {
+        if (song == null || song.getArtistName().isBlank() ||
+                song.getName().isBlank() || song.getAuditions() < 0) {
             throw new SongValidationException("Song is null");
         }
     }

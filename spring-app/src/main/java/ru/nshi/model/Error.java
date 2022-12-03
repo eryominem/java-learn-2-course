@@ -1,20 +1,20 @@
 package ru.nshi.model;
 
 public class Error {
-    private String error;
+    private String errorMessage;
 
     public Error() {
     }
 
-    public Error(String error) {
-        this.error = error;
+    public Error(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
-    public String getError() {
-        return error;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

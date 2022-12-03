@@ -52,10 +52,10 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Song updateSongAuditionsById(Long id, AuditionsDTO auditionsDTO) {
-        Song songToUpdate = songRepository.getById(id);
-
         if (auditionsDTO == null || auditionsDTO.getAuditions() < 1)
             throw new SongValidationException("Auditions must be greater than 0");
+
+        Song songToUpdate = songRepository.getById(id);
 
         songToUpdate.setAuditions(songToUpdate.getAuditions() + auditionsDTO.getAuditions());
         return songToUpdate;
@@ -63,6 +63,13 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public List<Song> updateSongAuditionsByIds(AuditionsDTO auditionsDTO) {
+        if (auditionsDTO == null || auditionsDTO.getAuditions() < 1)
+            throw new SongValidationException("Auditions must be greater than 0");
+
+        if (auditionsDTO.getSongs() == null || auditionsDTO.getSongs().length == 0) {
+            throw new SongValidationException("The list of songs cannot be empty");
+        }
+
         List<Song> resultList = new ArrayList<>();
         for (int i = 0; i < auditionsDTO.getSongs().length; i++) {
             resultList.add(updateSongAuditionsById(auditionsDTO.getSongs()[i], auditionsDTO));
