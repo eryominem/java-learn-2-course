@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+    <display-name>Servlet web app</display-name>
+
+    <servlet>
+        <servlet-name>PingServlet</servlet-name>
+        <servlet-class>ru.nshi.Task1.PingServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PingServlet</servlet-name>
+        <url-pattern>/ping</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SortServlet</servlet-name>
+        <servlet-class>ru.nshi.Task2.SortServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SortServlet</servlet-name>
+        <url-pattern>/sorting</url-pattern>
+    </servlet-mapping>
+
+</web-app>
