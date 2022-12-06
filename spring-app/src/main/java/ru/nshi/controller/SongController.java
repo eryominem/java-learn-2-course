@@ -93,9 +93,14 @@ public class SongController {
     }
 
     void checkSong(Song song) {
-        if (song == null || song.getArtistName().isBlank() ||
-                song.getName().isBlank() || song.getAuditions() < 0) {
+        System.out.println(song.getAuditions());
+        if (song == null || song.getArtistName() == null ||
+                song.getName() == null || Integer.valueOf(song.getAuditions()) == null) {
             throw new SongValidationException("Song is null");
+        }
+
+        if (song.getArtistName().isBlank() || song.getName().isBlank() || song.getAuditions() < 0) {
+            throw new SongValidationException("Song is blank");
         }
     }
 }
