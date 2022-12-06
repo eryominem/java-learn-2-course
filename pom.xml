@@ -11,6 +11,7 @@
     <modules>
         <module>json-processing</module>
         <module>learn-servlets</module>
+        <module>spring-app</module>
     </modules>
 
     <packaging>pom</packaging>
