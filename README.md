@@ -1,1 +1,2 @@
-# java-learn-2-course
+# Изучение Java
+
